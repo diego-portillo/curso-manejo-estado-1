@@ -8,19 +8,20 @@ function UseState({name}) {
         error:false,
         loading:false
     })
-
-    console.log(state.value)
     useEffect(()=>{
         console.log("Empezando el efecto")
         if (state.loading){
             setTimeout(() => {
                 console.log("haciendo la validación")
-                if(state.value !== SECUTIRY_CODE){
+                if(state.value === SECUTIRY_CODE){
                     setState({
+                        ...state,
+                        error:false,
                         loading:false
                     })
                 } else {
                     setState({
+                        ...state,
                         error:true,
                         loading:false
                     })
@@ -46,6 +47,7 @@ function UseState({name}) {
                 value={state.value}
                 onChange={(event)=>{
                     setState({
+                        ...state,
                         value:event.target.value
                     })
                 }}
@@ -53,6 +55,7 @@ function UseState({name}) {
             <button
                 onClick={() => {
                     setState({
+                        ...state,
                         error:false,
                         loading:true
                     })
